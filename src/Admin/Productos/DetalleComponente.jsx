@@ -40,12 +40,12 @@ const DetalleComponente = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <p><strong>Código:</strong> {componente.codigo}</p>
           <p><strong>Nombre:</strong> {componente.nombre}</p>
-          <p><strong>Clase:</strong> {componente.clase}</p>
-          <p><strong>Tipo:</strong> {componente.tipo}</p>
+          <p><strong>Clase:</strong> {componente.clase?.nombre || '-'}</p>
+          <p><strong>Tipo:</strong> {componente.tipo?.nombre || '-'}</p>
           <p><strong>Modelo:</strong> {componente.modelo}</p>
           <p><strong>Marca:</strong> {componente.marca}</p>
           <p><strong>Fabricante:</strong> {componente.fabricante}</p>
-          <p><strong>Unidad de Proceso:</strong> {componente.equipo}</p>
+          <p><strong>Unidad de Proceso:</strong> {componente.unidad_proceso?.nombre || '-'}</p>
           <p><strong>Cantidad:</strong> {componente.cantidad}</p>
         </div>
 
@@ -64,3 +64,4 @@ const DetalleComponente = () => {
 }
 
 export default DetalleComponente
+
