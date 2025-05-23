@@ -1,0 +1,40 @@
+.ant-btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.ant-btn-primary:hover {
+    background-color: #45A049;
+    border-color: #45A049;
+}
+
+.ant-table-thead > tr > th {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.ant-table-tbody > tr:hover > td {
+    background-color: #f0f8ff;
+}
+
+.ant-input {
+    border-radius: 5px;
+}
+
+.ant-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.ant-modal {
+    border-radius: 10px;
+}
+
+.ant-pagination-item-active {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.ant-pagination-item-active a {
+    color: #fff;
+}

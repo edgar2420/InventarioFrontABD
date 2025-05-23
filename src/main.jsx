@@ -1,57 +1,103 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
-import './index.css'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-//toast
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer } from 'react-toastify'
+import FormLogin from './pages/Login/Login.jsx';
+import Publico from './pages/Principal/Publico.jsx';
+import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
+import Especificaciones from './pages/Admin/Especificaciones.jsx';
+import ProtocoloEstudio from './pages/Admin/ProtocoloEstudio/ProtocoloEstudio.jsx';
+import FormulaList from './pages/Admin/FormulaCualitativa/FormulaList.jsx';
+import FormaFarmaceuticaList from './pages/Admin/FormaFarmaceutica/FormaFarmaceuticaList.jsx';
+import ClasificacionPA from './pages/Admin/ClasificacionPA.jsx';
+import Valoraciones from './pages/Admin/Valoraciones.jsx';
+import FrecuenciaMuestreoPage from './pages/Admin/ProtocoloEstudio/FrecuenciaMuestreoPage.jsx';
 
-
-// Layout
-import Layout from './components/Layout'
-
-// Vistas
-import HomePage from './Admin/Dashboard/Home'
-import CrearProducto from './Admin/Productos/ComponenteFormModal'
-import ListaComponentes from './Admin/Productos/ListaComponentes'
-import DetalleComponente from './Admin/Productos/DetalleComponente'
-import CrearMovimiento from './Admin/Movimientos/CrearMovimiento'
-import ListaMovimientos from './Admin/Movimientos/MovimientosList'
-import CrearClase from './Admin/Clase/Clase'
-import CrearTipo from './Admin/Tipo/Tipo'
-import UnidadProceso from './Admin/UnidadProceso/UnidadProceso'
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout><Outlet /></Layout>,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'componentes', element: <ListaComponentes /> },
-      { path: 'crear-producto', element: <CrearProducto /> },
-      { path: 'detalle-componente/:codigo', element: <DetalleComponente /> },
-      { path: 'crear-movimiento', element: <CrearMovimiento /> },
-      { path: 'movimientos', element: <ListaMovimientos /> },
-      { path: 'crear-clase', element: <CrearClase /> },
-      { path: 'crear-tipo', element: <CrearTipo /> },
-      { path: 'unidad-proceso', element: <UnidadProceso /> },
-    ]
+    element: <FormLogin />
+  },
+  {
+    path: '/admin-dashboard',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <AdminDashboard />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/protocolo-estudio',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <ProtocoloEstudio />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/especificaciones',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <Especificaciones />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/publico-dashboard',
+    element: (
+      <ProtectedRoute allowedRoles={['admin', 'publico']}>
+        <Publico />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/frecuencia-muestreo',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <FrecuenciaMuestreoPage />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/forma-farmaceutica',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <FormaFarmaceuticaList />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/valoraciones',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <Valoraciones />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/clasificacion_pa',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <ClasificacionPA />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: '/formula-cualitativa',
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <FormulaList />
+      </ProtectedRoute>
+    )
   }
-])
+]);
 
-const root = createRoot(document.getElementById('root'))
-root.render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
-    <ToastContainer
-      position="top-right"
-      autoClose={3000}
-      hideProgressBar={false}
-      closeOnClick
-      pauseOnHover
-      draggable
-      theme="light"
-    />
   </StrictMode>
-)
+);
